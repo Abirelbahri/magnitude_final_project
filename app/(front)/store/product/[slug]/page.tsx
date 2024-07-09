@@ -54,16 +54,16 @@ export default async function ProductDetails({
       <Link href="/store" className="font-semibold underline underline-offset-1 hover:text-white">Back to products</Link>
     </div>
     <div className="grid grid-cols-2 rounded-3xl">
-      <div className="pr-8">
+      <div className="pr-8 pb-3">
         <Image
           src={product.image}
           alt={product.name}
           width={600}
           height={600}
           sizes="100vw"
-          className="h-[80vh] rounded-3xl items-center justify-center border border-cyan-50 bg-gradient-to-b from-zinc-900 via-[#292929] to-[#070707]"
+          className="h-full rounded-3xl items-center justify-center border border-cyan-50 bg-gradient-to-b from-zinc-900 via-[#292929] to-[#070707]"
         ></Image>
-        <div className="flex items-center justify-center gap-7 py-4">
+{/*         <div className="flex items-center justify-center gap-7 py-4">
           <Image
             src={product.image}
             alt={product.name}
@@ -85,7 +85,7 @@ export default async function ProductDetails({
             height={200}
             className="w-[30%] h-[38vh] rounded-3xl items-center justify-center border p-3  border-cyan-50 bg-gradient-to-b from-zinc-900 via-[#292929] to-[#070707]"
           ></Image>
-        </div>
+        </div> */}
       </div>
       <div className="p-4">
         <ul className="space-y-4">

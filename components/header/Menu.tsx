@@ -12,11 +12,10 @@ import {
 } from "react-icons/bi";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { SearchBox } from "./SearchBox";
+/* import { SearchBox } from "./SearchBox"; */
 import { MdShoppingBag } from "react-icons/md";
 import { IoHeart } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
-
 
 const Menu = () => {
   const { items, init } = useCartService();
@@ -38,14 +37,13 @@ const Menu = () => {
     (document.activeElement as HTMLElement).blur();
   };
 
-
   return (
     <>
       {/* <div className="block font-bold text-md text-white">
       MɅGИITUDE
       </div> */}
-      <div className="flex flex-[4] justify-center items-center">
-      <div className="mr-[20px] w-[30px] h-[30px] bg-white rounded-full relative cursor-pointer">
+      <div className="hidden lg:flex flex-[4] justify-center items-center">
+        <div className="mr-[20px] w-[30px] h-[30px] bg-white rounded-full relative cursor-pointer">
           <BiLogoTwitter
             color="black"
             className="w-[23px] h-[23px] absolute left-1 top-1"
@@ -112,19 +110,18 @@ const Menu = () => {
               )}
             </Link>
           </li>
-            <li>
+          <li>
             <Link
               className="mr-4 mt-1 flex items-center cursor-pointer relative"
               href="/store/cart"
             >
-             <IoHeart
-            className="w-6 h-6 bg-white rounded-full p-1"
-            color="black"
-          />
-          
+              <IoHeart
+                className="w-6 h-6 bg-white rounded-full p-1"
+                color="black"
+              />
             </Link>
-            </li>
-        
+          </li>
+
           {session && session.user ? (
             <>
               <li>

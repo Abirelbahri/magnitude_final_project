@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Menu from "./Menu";
-import { SearchBox } from "./SearchBox";
+/* import { SearchBox } from "./SearchBox"; */
 
 const Header = () => {
   return (
@@ -24,16 +24,19 @@ const Header = () => {
                 ></path>
               </svg>
             </label>
-            {/* <Link href="/" className="btn btn-ghost text-lg font-bold">
+            <Link
+              href="/"
+              className="btn btn-ghost text-white text-lg font-bold "
+            >
               MɅGИITUDE
-            </Link> */}
+            </Link>
           </div>
 
           <Menu />
         </div>
-        <div className="block md:hidden text-center pb-3">
+        {/*         <div className="block md:hidden text-center pb-3">
           <SearchBox />
-        </div>
+        </div> */}
       </nav>
     </header>
   );

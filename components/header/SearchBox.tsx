@@ -1,4 +1,4 @@
-'use client'
+/* 'use client'
 import { useSearchParams } from 'next/navigation'
 import useSWR from 'swr'
 
@@ -36,3 +36,4 @@ export const SearchBox = () => {
     </form>
   )
 }
+ */
