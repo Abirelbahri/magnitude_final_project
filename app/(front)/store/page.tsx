@@ -23,15 +23,6 @@ const ratings = [5, 4, 3, 2, 1];
 
 export async function generateMetadata({
   searchParams: { q = "all", category = "all", price = "all", rating = "all" },
-}: {
-  searchParams: {
-    q: string;
-    category: string;
-    price: string;
-    rating: string;
-    sort: string;
-    page: string;
-  };
 }) {
   if (
     (q !== "all" && q !== "") ||
@@ -61,37 +52,31 @@ export default async function SearchPage({
     sort = "newest",
     page = "1",
   },
-}: {
-  searchParams: {
-    q: string;
-    category: string;
-    price: string;
-    rating: string;
-    sort: string;
-    page: string;
-  };
 }) {
-  const getFilterUrl = ({
-    c,
-    s,
-    p,
-    r,
-    pg,
-  }: {
-    c?: string;
-    s?: string;
-    p?: string;
-    r?: string;
-    pg?: string;
-  }) => {
-    const params = { q, category, price, rating, sort, page };
-    if (c) params.category = c;
-    if (p) params.price = p;
-    if (r) params.rating = r;
-    if (pg) params.page = pg;
-    if (s) params.sort = s;
-    return `/store?${new URLSearchParams(params).toString()}`;
-  };
+// Adjusting the getFilterUrl function to accept optional parameters
+const getFilterUrl = ({
+  c,
+  s,
+  p,
+  r,
+  pg,
+}: {
+  c?: string; // Making all properties optional
+  s?: string;
+  p?: string;
+  r?: string;
+  pg?: string;
+}) => {
+  const params = { q, category, price, rating, sort, page };
+  if (c) params.category = c;
+  if (p) params.price = p;
+  if (r) params.rating = r;
+  if (pg) params.page = pg;
+  if (s) params.sort = s;
+  return `/store?${new URLSearchParams(params).toString()}`;
+};
+
+
   const categories = await productServices.getCategories();
   const { countProducts, products, pages } = await productServices.getByQuery({
     category,
@@ -101,27 +86,29 @@ export default async function SearchPage({
     page,
     sort,
   });
+
   return (
-    <div className="grid md:grid-cols-5 gap-5 p-4">
-      <div>
-        <div className="text-sm font-semibold pb-3">Categories</div>
-        <div>
-          <ul>
+    <div className="grid md:grid-cols-4 gap-6 p-6 bg-black text-white">
+      <aside className="space-y-6 bg-black p-4 border border-gray-700">
+        {/* Categories Section */}
+        <section>
+          <h2 className="text-lg font-semibold mb-3">Categories</h2>
+          <ul className="space-y-1">
             <li>
               <Link
-                className={`link link-hover text-white font-bold text-xs ${
-                  "all" === category ? "link-primary" : ""
+                className={`text-sm block ${
+                  "all" === category ? "font-bold text-blue-500" : "text-gray-400"
                 }`}
                 href={getFilterUrl({ c: "all" })}
               >
                 All Categories
               </Link>
             </li>
-            {categories.map((c: string) => (
+            {categories.map((c) => (
               <li key={c}>
                 <Link
-                  className={`link link-hover  text-sm${
-                    c === category ? "link-primary" : ""
+                  className={`text-sm block ${
+                    c === category ? "font-bold text-blue-500" : "text-gray-400"
                   }`}
                   href={getFilterUrl({ c })}
                 >
@@ -130,14 +117,16 @@ export default async function SearchPage({
               </li>
             ))}
           </ul>
-        </div>
-        <div>
-          <div className="text-xl font-semibold pb-3 pt-5">Price</div>
-          <ul>
+        </section>
+
+        {/* Price Section */}
+        <section>
+          <h2 className="text-lg font-semibold mb-3">Price</h2>
+          <ul className="space-y-1">
             <li>
               <Link
-                className={`link link-hover text-white font-bold text-xs ${
-                  "all" === price ? "link-primary" : ""
+                className={`text-sm block ${
+                  "all" === price ? "font-bold text-blue-500" : "text-gray-400"
                 }`}
                 href={getFilterUrl({ p: "all" })}
               >
@@ -148,8 +137,8 @@ export default async function SearchPage({
               <li key={p.value}>
                 <Link
                   href={getFilterUrl({ p: p.value })}
-                  className={`link link-hover text-sm ${
-                    p.value === price ? "link-primary" : ""
+                  className={`text-sm block ${
+                    p.value === price ? "font-bold text-blue-500" : "text-gray-400"
                   }`}
                 >
                   {p.name}
@@ -157,15 +146,17 @@ export default async function SearchPage({
               </li>
             ))}
           </ul>
-        </div>
-        <div>
-          <div className="text-xl font-semibold pb-3 pt-5">Customer Review</div>
-          <ul>
+        </section>
+
+        {/* Rating Section */}
+        <section>
+          <h2 className="text-lg font-semibold mb-3">Customer Review</h2>
+          <ul className="space-y-1">
             <li>
               <Link
                 href={getFilterUrl({ r: "all" })}
-                className={`link link-hover text-white font-bold text-xs ${
-                  "all" === rating ? "link-primary" : ""
+                className={`text-sm block ${
+                  "all" === rating ? "font-bold text-blue-500" : "text-gray-400"
                 }`}
               >
                 All Reviews
@@ -175,34 +166,32 @@ export default async function SearchPage({
               <li key={r}>
                 <Link
                   href={getFilterUrl({ r: `${r}` })}
-                  className={`link link-hover ${
-                    `${r}` === rating ? "link-primary" : ""
+                  className={`text-sm block ${
+                    `${r}` === rating ? "font-bold text-blue-500" : "text-gray-400"
                   }`}
                 >
-                  <Rating caption={" & up"} value={r}></Rating>
+                  <Rating caption={" & up"} value={r} />
                 </Link>
               </li>
             ))}
           </ul>
-        </div>
-      </div>
-      <div className="md:col-span-4">
-        <div className="flex items-center justify-between py-4">
-          <div className="flex items-center">
+        </section>
+      </aside>
+
+      <main className="md:col-span-3 space-y-6">
+        {/* Header Section */}
+        <div className="flex justify-between items-center p-4 bg-black border border-gray-700">
+          <div className="text-gray-400">
             {products.length === 0 ? "No" : countProducts} Results
-            {q !== "all" && q !== "" && ` : ${q}`}
+            {q !== "all" && ` : ${q}`}
             {category !== "all" && ` : ${category}`}
             {price !== "all" && ` : Price ${price}`}
             {rating !== "all" && ` : Rating ${rating} & up`}
-            &nbsp;
-            {(q !== "all" && q !== "") ||
-            category !== "all" ||
-            rating !== "all" ||
-            price !== "all" ? (
-              <Link className="btn btn-sm btn-ghost ml-2" href="/store">
-                Clear
+            {["all", category, rating, price].includes("all") ? null : (
+              <Link className="ml-2 text-blue-500 underline" href="/store">
+                Clear Filters
               </Link>
-            ) : null}
+            )}
           </div>
           <div className="flex items-center space-x-2">
             <span>Sort by:</span>
@@ -210,10 +199,8 @@ export default async function SearchPage({
               <Link
                 key={order}
                 href={getFilterUrl({ s: order })}
-                className={`link link-hover ${
-                  sort === order
-                    ? "text-gray-300 font-semibold"
-                    : "text-gray-600"
+                className={`text-sm font-medium ${
+                  sort === order ? "text-blue-500" : "text-gray-400"
                 }`}
               >
                 {order}
@@ -221,28 +208,33 @@ export default async function SearchPage({
             ))}
           </div>
         </div>
-        <div>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
-            {products.map((product) => (
-              <ProductItem key={product.slug} product={product} />
+
+        {/* Products Section */}
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {products.map((product) => (
+            <ProductItem key={product.slug} product={product} />
+          ))}
+        </div>
+
+        {/* Pagination Section */}
+        {pages > 1 && (
+          <div className="flex justify-center mt-6">
+            {Array.from({ length: pages }, (_, index) => (
+              <Link
+                key={index}
+                className={`mx-1 px-3 py-1 rounded-md border border-gray-700 ${
+                  Number(page) === index + 1
+                    ? "bg-blue-600 text-white"
+                    : "bg-black text-gray-400"
+                }`}
+                href={getFilterUrl({ pg: `${index + 1}` })}
+              >
+                {index + 1}
+              </Link>
             ))}
           </div>
-          <div className="join flex justify-center mt-4">
-            {products.length > 0 &&
-              Array.from(Array(pages).keys()).map((p) => (
-                <Link
-                  key={p}
-                  className={`join-item btn ${
-                    Number(page) === p + 1 ? "btn-active" : ""
-                  }`}
-                  href={getFilterUrl({ pg: `${p + 1}` })}
-                >
-                  {p + 1}
-                </Link>
-              ))}
-          </div>
-        </div>
-      </div>
+        )}
+      </main>
     </div>
   );
 }

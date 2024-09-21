@@ -5,7 +5,7 @@ import { FaGoogle } from "react-icons/fa";
 import { FaMeta, FaArrowRight } from "react-icons/fa6";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { AnimatePresence, motion } from "framer-motion";
-import RegisterForm from "@/components//auth/RegisterForm";
+import RegisterForm from "@/components/auth/RegisterForm";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { GiEntryDoor } from "react-icons/gi";
@@ -34,13 +34,13 @@ const SignInPage = () => {
   };
 
   return (
-    <div className="w-[100vw] h-[100vh] flex justify-center items-center  bg-body">
-      <div className="flex  h-[100vh] w-[100vw]  bg-black ">
-        <div className=" h-[90vh] w-[60%] rounded-bl-3xl rounded-br-3xl shadow-lg ml-16  flex items-start">
+    <div className="w-full h-full flex justify-center items-center bg-black">
+      <div className="flex w-full h-full">
+        <div className="h-[90vh] w-[60%] rounded-bl-3xl rounded-br-3xl shadow-lg ml-16 flex items-start">
           <Image
             src={"/assets/auth/login1.jpg"}
-            className="rounded-br-3xl rounded-bl-3xl h-full  shadow-white"
-            alt="k"
+            className="rounded-br-3xl rounded-bl-3xl h-full shadow-white"
+            alt="login image"
             unoptimized={true}
             width={500}
             height={180}
@@ -51,7 +51,7 @@ const SignInPage = () => {
             transition={{ duration: 0.8 }}
           >
             <Link href="/">
-              <GiEntryDoor className="w-7 h-7 ml-2" width={10} height={10} />
+              <GiEntryDoor className="w-7 h-7 ml-2 text-white" />
             </Link>
           </motion.div>
         </div>
@@ -62,41 +62,35 @@ const SignInPage = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 50, transition: { duration: 0.3 } }}
               transition={{ duration: 0.8 }}
-              className="flex  w-[60vw] flex-col mt-10  pl-[6%]"
+              className="flex w-[60vw] flex-col mt-10 pl-[6%]"
             >
               <h1 className="text-3xl font-semibold text-white mt-[16%]">
                 Unlock Your Style Potential <br /> with MAGNITUDE
               </h1>
-              {/* <p className='mt-6 ml-1'>Don't have an account ? <Link href="/register">Register</Link> {" "}</p> */}
               <motion.div
-                onClick={() => {
-                  handleSignIn();
-                }}
-                className="mt-12 cursor-pointer border-white border-[1px] flex items-center justify-between w-[70%] bg-white text-white p-2 pl-6 rounded-xl bg-opacity-20 backdrop-filter backdrop-blur-lg"
+                onClick={handleSignIn}
+                className="mt-12 cursor-pointer flex items-center justify-between w-[70%] p-2 pl-6 rounded-xl bg-opacity-20 backdrop-filter backdrop-blur-lg border border-green-500 text-white"
                 whileHover={{
-                  backgroundColor: "rgba(255, 255, 255, 0.3)",
-                  borderColor: "blue",
+                  backgroundColor: "rgba(34, 197, 94, 0.3)",
+                  borderColor: "green",
                 }}
               >
                 <FaGoogle className="w-5 h-5" />
                 <p>Continue with Google</p>
                 <p className="pl-12">|</p>
                 <motion.div
-                  whileHover={{ borderColor: "blue" }}
+                  whileHover={{ borderColor: "green" }}
                   transition={{ duration: 0.2 }}
                 >
-                  <FaMeta
-                    color="blue"
-                    className="bg-black w-8 h-8 rounded-full p-1"
-                  />
+                  <FaMeta className="bg-black w-8 h-8 rounded-full p-1 text-green-500" />
                 </motion.div>
               </motion.div>
               <motion.div
                 whileHover={{
-                  backgroundColor: "rgba(100 , 116 , 139, 0.7)",
+                  backgroundColor: "rgba(99, 102, 241, 0.5)",
                 }}
                 onClick={handleShowLoginForm}
-                className="mt-2 cursor-pointer flex border-transparent border-[1px] items-center justify-between w-[70%] bg-slate-500 text-white p-2 pl-6 rounded-xl shadow-lg  bg-opacity-60 backdrop-filter backdrop-blur-lg"
+                className="mt-2 cursor-pointer flex border border-transparent items-center justify-between w-[70%] p-2 pl-6 rounded-xl shadow-lg bg-indigo-600 text-white"
               >
                 <MdOutlineMailOutline className=" w-5 h-5" />
                 <p>Continue with Email</p>
@@ -106,12 +100,12 @@ const SignInPage = () => {
                   className="bg-black w-8 h-8 rounded-full p-2"
                 />
               </motion.div>
-              <p className="mt-5 text-sm">
-                By signing in, you agree to Generative AI&apos;s{" "}
-                <span className="underline">
+              <p className="mt-5 text-sm text-gray-400">
+                By signing in, you agree to MAGNITUDE&apos;s{" "}
+                <span className="underline text-white">
                   Terms of Service, <br /> Privacy Policy{" "}
                 </span>{" "}
-                and <span className="underline">Data Usage Properties.</span>
+                and <span className="underline text-white">Data Usage Properties.</span>
               </p>
             </motion.div>
           ) : (

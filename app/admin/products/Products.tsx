@@ -12,7 +12,6 @@ import { MdDelete } from "react-icons/md";
 
 export default function Products() {
   const { data: products, error } = useSWR(`/api/admin/products`)
-
   const router = useRouter()
 
   const { trigger: deleteProduct } = useSWRMutation(
@@ -57,13 +56,13 @@ export default function Products() {
   if (!products) return <Loading/>
 
   return (
-    <div>
-      <div className="flex justify-between items-center">
-        <h1 className="py-4 text-2xl">Products</h1>
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl text-white">Products</h1>
         <button
           disabled={isCreating}
           onClick={() => createProduct()}
-          className="btn btn-primary btn-sm"
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition"
         >
           {isCreating && <span className="loading loading-spinner"></span>}
           Create
@@ -71,40 +70,39 @@ export default function Products() {
       </div>
 
       <div className="overflow-x-auto">
-        <table className="table">
-          <thead className='uppercase bg-[#292929] text-white'>
+        <table className="w-full text-sm border border-gray-700 bg-black text-white">
+          <thead className='bg-[#292929]'>
             <tr>
-              <th>id</th>
-              <th>name</th>
-              <th>price</th>
-              <th>category</th>
-              <th>count in stock</th>
-              <th>rating</th>
-              <th>actions</th>
+              <th className="px-4 py-2 border-b border-gray-700">ID</th>
+              <th className="px-4 py-2 border-b border-gray-700">Name</th>
+              <th className="px-4 py-2 border-b border-gray-700">Price</th>
+              <th className="px-4 py-2 border-b border-gray-700">Category</th>
+              <th className="px-4 py-2 border-b border-gray-700">Stock</th>
+              <th className="px-4 py-2 border-b border-gray-700">Rating</th>
+              <th className="px-4 py-2 border-b border-gray-700">Actions</th>
             </tr>
           </thead>
           <tbody>
             {products.map((product: Product) => (
-              <tr key={product._id}>
-                <td>{formatId(product._id!)}</td>
-                <td>{product.name}</td>
-                <td>${product.price}</td>
-                <td>{product.category}</td>
-                <td>{product.countInStock}</td>
-                <td>{product.rating}</td>
-                <td>
+              <tr key={product._id} className="hover:bg-gray-800">
+                <td className="px-4 py-2 border-b border-gray-700">{formatId(product._id!)}</td>
+                <td className="px-4 py-2 border-b border-gray-700">{product.name}</td>
+                <td className="px-4 py-2 border-b border-gray-700">${product.price}</td>
+                <td className="px-4 py-2 border-b border-gray-700">{product.category}</td>
+                <td className="px-4 py-2 border-b border-gray-700">{product.countInStock}</td>
+                <td className="px-4 py-2 border-b border-gray-700">{product.rating}</td>
+                <td className="px-4 py-2 border-b border-gray-700 flex space-x-2">
                   <Link
                     href={`/admin/products/${product._id}`}
-                    type="button"
-                    className="btn btn-ghost bg-gray-500 rounded-xl btn-sm"
+                    className="p-2 bg-gray-600 text-white rounded hover:bg-gray-500 transition"
+                    aria-label={`Edit product ${product.name}`}
                   >
                     <FaEdit />
                   </Link>
-                  &nbsp;
                   <button
                     onClick={() => deleteProduct({ productId: product._id! })}
                     type="button"
-                    className="btn btn-ghost bg-red-600 rounded-xl btn-sm"
+                    className="p-2 bg-red-600 text-white rounded hover:bg-red-500 transition"
                     aria-label={`Delete product ${product.name}`}
                   >
                     <MdDelete />

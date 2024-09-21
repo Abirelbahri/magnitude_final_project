@@ -37,6 +37,21 @@ export const options = {
   plugins: {
     legend: {
       position: "top" as const,
+      labels: {
+        color: "white", // Adjusts legend text color
+      },
+    },
+  },
+  scales: {
+    x: {
+      ticks: {
+        color: "white", // Adjusts x-axis text color
+      },
+    },
+    y: {
+      ticks: {
+        color: "white", // Adjusts y-axis text color
+      },
     },
   },
 };
@@ -56,8 +71,8 @@ const Dashboard = () => {
         data: summary.salesData.map(
           (x: { totalSales: number }) => x.totalSales
         ),
-        borderColor: "rgb(34, 139, 34)",
-
+        borderColor: "#22C55E", // Adjusted color to green
+        backgroundColor: "rgba(34, 197, 94, 0.3)", // Slight transparency for fill
       },
     ],
   };
@@ -70,12 +85,13 @@ const Dashboard = () => {
         data: summary.salesData.map(
           (x: { totalOrders: number }) => x.totalOrders
         ),
-        borderColor: "rgb(53, 162, 235)",
+        borderColor: "#3B82F6", // Adjusted color to blue
+        backgroundColor: "rgba(59, 130, 246, 0.3)",
       },
     ],
   };
   const productsData = {
-    labels: summary.productsData.map((x: { _id: string }) => x._id), // 2022/01 2022/03
+    labels: summary.productsData.map((x: { _id: string }) => x._id),
     datasets: [
       {
         label: "Category",
@@ -83,31 +99,32 @@ const Dashboard = () => {
           (x: { totalProducts: number }) => x.totalProducts
         ),
         backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
+          "#F87171",
+          "#60A5FA",
+          "#FBBF24",
+          "#34D399",
+          "#A78BFA",
+          "#F59E0B",
         ],
         borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
+          "#EF4444",
+          "#3B82F6",
+          "#F59E0B",
+          "#10B981",
+          "#8B5CF6",
+          "#D97706",
         ],
+        borderWidth: 1,
       },
     ],
   };
   const usersData = {
-    labels: summary.usersData.map((x: { _id: string }) => x._id), // 2022/01 2022/03
+    labels: summary.usersData.map((x: { _id: string }) => x._id),
     datasets: [
       {
         label: "Users",
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        borderColor: "#3B82F6", // Blue
+        backgroundColor: "rgba(59, 130, 246, 0.5)",
         data: summary.usersData.map(
           (x: { totalUsers: number }) => x.totalUsers
         ),
@@ -116,22 +133,19 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="p-4 min-h-screen">
-      <div className="my-2 grid gap-6 md:grid-cols-4 shadow-lg rounded-lg ">
-        <div className="stat p-4 bg-[#171717] border border-white rounded-3xl">
-          <div className="stat-title  text-white font-bold">Sales</div>
-          <div className="stat-value text-green-600">
+    <div className="p-4 min-h-screen bg-black text-white">
+      <div className="my-2 grid gap-6 md:grid-cols-4">
+        <div className="stat p-4  border border-gray-700 rounded-xl shadow-md">
+          <div className="stat-title text-gray-300 font-semibold">Sales</div>
+          <div className="stat-value text-green-500">
             ${formatNumber(summary.ordersPrice)}
           </div>
-          {/* <div className="stat-desc text-gray-500 hover:underline">
-            <Link href="/admin/orders">View sales</Link>
-          </div> */}
         </div>
-        <div className="stat p-4 bg-[#171717] border border-white rounded-3xl">
-          <div className="stat-title text-white font-bold">Orders</div>
-          <div className="stat-value text-blue-500">{summary.ordersCount}</div>
-          <div className="stat-desc text-gray-500 hover:underline">
-            <Link href="/admin/orders" passHref>
+        <div className="stat p-4 border border-gray-700 rounded-xl shadow-md">
+          <div className="stat-title text-gray-300 font-semibold">Orders</div>
+          <div className="stat-value text-blue-400">{summary.ordersCount}</div>
+          <div className="stat-desc text-gray-400 hover:underline">
+            <Link href="/admin/orders">
               <div className="flex items-center cursor-pointer">
                 View orders
                 <IoIosArrowDroprightCircle className="ml-1 h-5 w-5" />
@@ -139,12 +153,12 @@ const Dashboard = () => {
             </Link>
           </div>
         </div>
-        <div className="stat p-4 bg-[#171717] border border-white rounded-3xl">
-          <div className="stat-title text-white font-bold">Products</div>
-          <div className="stat-value text-orange-500">
+        <div className="stat p-4 border border-gray-700 rounded-xl shadow-md">
+          <div className="stat-title text-gray-300 font-semibold">Products</div>
+          <div className="stat-value text-yellow-400">
             {summary.productsCount}
           </div>
-          <div className="stat-desc text-gray-500 hover:underline">
+          <div className="stat-desc text-gray-400 hover:underline">
             <Link href="/admin/products">
               <div className="flex items-center cursor-pointer">
                 View products
@@ -153,10 +167,10 @@ const Dashboard = () => {
             </Link>
           </div>
         </div>
-        <div className="stat p-4 bg-[#171717] border border-white rounded-3xl">
-          <div className="stat-title text-white font-bold">Users</div>
-          <div className="stat-value text-red-500">{summary.usersCount}</div>
-          <div className="stat-desc text-gray-500 hover:underline">
+        <div className="stat p-4 border border-gray-700 rounded-xl shadow-md">
+          <div className="stat-title text-gray-300 font-semibold">Users</div>
+          <div className="stat-value text-red-400">{summary.usersCount}</div>
+          <div className="stat-desc text-gray-400 hover:underline">
             <Link href="/admin/users">
               <div className="flex items-center cursor-pointer">
                 View Users
@@ -167,23 +181,23 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="grid md:grid-cols-2 gap-6 my-6">
-        <div className="border border-white rounded-3xl p-4">
+        <div className="border border-gray-700 rounded-xl p-4 shadow-md">
           <h2 className="text-lg py-1">Sales Report</h2>
           <Line data={salesData} options={options} />
         </div>
-        <div className="p-4 border border-white rounded-3xl">
+        <div className="border border-gray-700 rounded-xl p-4 shadow-md">
           <h2 className="text-lg py-1">Orders Report</h2>
           <Line data={ordersData} options={options} />
         </div>
       </div>
       <div className="grid md:grid-cols-2 gap-6 my-6">
-        <div className="p-4">
+        <div className="border border-gray-700 rounded-xl p-4 shadow-md">
           <h2 className="text-lg py-1">Products Report</h2>
           <div className="flex items-center justify-center h-64 w-full">
             <Pie data={productsData} options={options} />
           </div>
         </div>
-        <div className="border border-white rounded-3xl p-4">
+        <div className="border border-gray-700 rounded-xl p-4 shadow-md">
           <h2 className="text-lg py-1">Users Report</h2>
           <Bar data={usersData} options={options} />
         </div>

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import useSWRMutation from "swr/mutation";
 import useSWR from "swr";
 import toast from "react-hot-toast";
@@ -68,8 +68,8 @@ export default function ProductEditForm({ productId }: { productId: string }) {
     required?: boolean;
     pattern?: ValidationRule<RegExp>;
   }) => (
-    <div className="md:flex mb-6 text-white">
-      <label className="label md:w-1/5" htmlFor={id}>
+    <div className="md:flex my-3 text-white">
+      <label className="md:w-1/5 font-semibold" htmlFor={id}>
         {name}
       </label>
       <div className="md:w-4/5">
@@ -80,10 +80,10 @@ export default function ProductEditForm({ productId }: { productId: string }) {
             required: required && `${name} is required`,
             pattern,
           })}
-          className="input input-bordered w-full max-w-md"
+          className="w-full max-w-md p-2 bg-black text-white border border-gray-700 rounded-md"
         />
         {errors[id]?.message && (
-          <div className="text-error">{errors[id]?.message}</div>
+          <div className="text-red-500 mt-1">{errors[id]?.message}</div>
         )}
       </div>
     </div>
@@ -122,50 +122,50 @@ export default function ProductEditForm({ productId }: { productId: string }) {
   };
 
   return (
-    <div className="py-2">
-      <h1 className="text-2xl font-semibold py-4">Edit Product : {formatId(productId)}</h1>
-      <div>
-        <form onSubmit={handleSubmit(formSubmit)}>
-          <FormInput name="Name :" id="name" required />
-          <FormInput name="Slug :" id="slug" required />
-          <FormInput name="Image :" id="image" required />
-          <div className="md:flex mb-6 text-white">
-            <label className="label md:w-1/5" htmlFor="imageFile">
-              Upload Image
-            </label>
-            <div className="md:w-4/5">
-              <input
-                type="file"
-                className="file-input w-full max-w-md"
-                id="imageFile"
-                onChange={uploadHandler}
-              />
-            </div>
-          </div>
-          <FormInput name="Price :" id="price" required />
-          <FormInput name="Category :" id="category" required />
-          <FormInput name="Brand :" id="brand" required />
-          <FormInput name="Description :" id="description" required />
-          <FormInput name="Count In Stock :" id="countInStock" required />
+    <div className="p-4 bg-black text-white rounded-md">
+      <h1 className="text-2xl font-semibold py-4">Edit Product: {formatId(productId)}</h1>
+      <form onSubmit={handleSubmit(formSubmit)}>
+        <FormInput name="Name" id="name" required />
+        <FormInput name="Slug" id="slug" required />
+        <FormInput name="Image" id="image" required />
 
-          <div className="grid grid-cols-3 items-center justify-center">
-            <button
-              type="submit"
-              disabled={isUpdating}
-              className="btn btn-primary"
-            >
-              {isUpdating && <span className="loading loading-spinner"></span>}
-              Update
-            </button>
-            <Link
-              className="btn ml-4 bg-red-600 text-black font-bold hover:bg-red-800"
-              href="/admin/products"
-            >
-              Cancel
-            </Link>
+        <div className="md:flex my-3">
+          <label className="md:w-1/5 font-semibold" htmlFor="imageFile">
+            Upload Image
+          </label>
+          <div className="md:w-4/5">
+            <input
+              type="file"
+              className="w-full max-w-md p-2 bg-black text-white border border-gray-700 rounded-md"
+              id="imageFile"
+              onChange={uploadHandler}
+            />
           </div>
-        </form>
-      </div>
+        </div>
+
+        <FormInput name="Price" id="price" required />
+        <FormInput name="Category" id="category" required />
+        <FormInput name="Brand" id="brand" required />
+        <FormInput name="Description" id="description" required />
+        <FormInput name="Count In Stock" id="countInStock" required />
+
+        <div className="flex space-x-4 mt-6">
+          <button
+            type="submit"
+            disabled={isUpdating}
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500 transition"
+          >
+            {isUpdating && <span className="loading loading-spinner mr-2"></span>}
+            Update
+          </button>
+          <Link
+            href="/admin/products"
+            className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-500 transition"
+          >
+            Cancel
+          </Link>
+        </div>
+      </form>
     </div>
   );
 }

@@ -13,6 +13,7 @@ import Loading from '@/components/dashboardfeatures/loading/loading'
 export default function UserEditForm({ userId }: { userId: string }) {
   const { data: user, error } = useSWR(`/api/admin/users/${userId}`)
   const router = useRouter()
+  
   const { trigger: updateUser, isMutating: isUpdating } = useSWRMutation(
     `/api/admin/users/${userId}`,
     async (url, { arg }) => {
@@ -50,7 +51,7 @@ export default function UserEditForm({ userId }: { userId: string }) {
   }
 
   if (error) return error.message
-  if (!user) return <Loading/>
+  if (!user) return <Loading />
 
   const FormInput = ({
     id,
@@ -64,7 +65,7 @@ export default function UserEditForm({ userId }: { userId: string }) {
     pattern?: ValidationRule<RegExp>
   }) => (
     <div className="md:flex my-3">
-      <label className="label md:w-1/5" htmlFor={id}>
+      <label className="label md:w-1/5 text-white" htmlFor={id}>
         {name}
       </label>
       <div className="md:w-4/5">
@@ -75,17 +76,17 @@ export default function UserEditForm({ userId }: { userId: string }) {
             required: required && `${name} is required`,
             pattern,
           })}
-          className="input input-bordered w-full max-w-md"
+          className="input input-bordered w-full max-w-md bg-black text-white border-gray-700"
         />
         {errors[id]?.message && (
-          <div className="text-error">{errors[id]?.message}</div>
+          <div className="text-red-500">{errors[id]?.message}</div>
         )}
       </div>
     </div>
   )
 
   return (
-    <div>
+    <div className="p-4 bg-black text-white rounded-md shadow-md">
       <h1 className="text-2xl py-4">Edit User {formatId(userId)}</h1>
       <div>
         <form onSubmit={handleSubmit(formSubmit)}>
@@ -93,30 +94,32 @@ export default function UserEditForm({ userId }: { userId: string }) {
           <FormInput name="Email" id="email" required />
 
           <div className="md:flex my-3">
-            <label className="label md:w-1/5" htmlFor="isAdmin">
+            <label className="label md:w-1/5 text-white" htmlFor="isAdmin">
               Admin
             </label>
             <div className="md:w-4/5">
               <input
                 id="isAdmin"
                 type="checkbox"
-                className="toggle"
+                className="toggle bg-gray-800 border-gray-700"
                 {...register('isAdmin')}
               />
             </div>
           </div>
 
-          <button
-            type="submit"
-            disabled={isUpdating}
-            className="btn btn-primary"
-          >
-            {isUpdating && <span className="loading loading-spinner"></span>}
-            Update
-          </button>
-          <Link className="btn ml-4" href="/admin/users">
-            Cancel
-          </Link>
+          <div className="flex space-x-4 mt-6">
+            <button
+              type="submit"
+              disabled={isUpdating}
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500 transition disabled:opacity-50"
+            >
+              {isUpdating && <span className="loading loading-spinner"></span>}
+              Update
+            </button>
+            <Link className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-500 transition" href="/admin/users">
+              Cancel
+            </Link>
+          </div>
         </form>
       </div>
     </div>
