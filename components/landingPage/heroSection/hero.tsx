@@ -2,53 +2,56 @@
 import Image from 'next/image'
 import React from 'react'
 import { MdArrowOutward } from 'react-icons/md'
-import Carousel from './Carousel';
-
+import Carousel from './Carousel'
 
 const Hero = () => {
   const slides = ['/assets/heroSection/hero video.mp4', '/assets/heroSection/hero2.mp4', '/assets/heroSection/hero3.mp4'];
+
   return (
-    <div className='relative container h-[40vh] lg:h-[100vh] w-[100vw] pt-5' >
-        <div className="flex justify-between mb-[-2%] ">
-        <div className="text-xs lg:text-xl flex flex-col text-[#aaa4a4] w-[17%] ml-[3%]">
-          <div className="flex items-center justify-between text-[#ebe7e2]">
-            <p>Summer 2023 collections </p>
-            <MdArrowOutward className='cursor-pointer'/>
+    <div className='relative container h-[50vh] lg:h-[100vh] w-full pt-5'>
+      {/* Top section with collection details */}
+      <div className="flex justify-between mb-4 px-4 lg:px-10">
+        <div className="text-xs lg:text-lg flex flex-col text-[#aaa4a4] w-1/4 lg:w-1/5">
+          <div className="flex items-center justify-between text-[#ebe7e2] mb-1">
+            <p>Summer 2023 Collections</p>
+            <MdArrowOutward className='cursor-pointer hover:scale-105 transition-transform duration-300'/>
           </div>
-          <p className="text italic">( 9 Public</p>
-          <p className="text italic">/ 4 Limited editions )</p>
+          <p className="italic text-sm">( 9 Public / 4 Limited editions )</p>
         </div>
-        <div className=" text-xs lg:text-xl flex flex-col text-[#aaa4a4] mr-7 w-[17%] ml-[3%]">
-          <div className="flex items-center justify-between  text-[#ebe7e2]">
-            <p>Popular men&#39;s accessories</p>
-            <MdArrowOutward className='cursor-pointer'/>
+        <div className="text-xs lg:text-lg flex flex-col text-[#aaa4a4] w-1/4 lg:w-1/5">
+          <div className="flex items-center justify-between text-[#ebe7e2] mb-1">
+            <p>Popular Men's Accessories</p>
+            <MdArrowOutward className='cursor-pointer hover:scale-105 transition-transform duration-300'/>
           </div>
-          <p className="text italic ">( 7 Public</p>
-          <p className="text italic">/ 2 Limited editions )</p>
+          <p className="italic text-sm">( 7 Public / 2 Limited editions )</p>
         </div>
-        </div>
-        
-        <Image src={'/assets/heroSection/MACHINIST (2).png'} alt='k' unoptimized={true} width={80} height={80} className='items-center justify-center w-[70vh] lg:w-[85vw] relative z-60 ml-[4%] mt-[2%] pt-[1%]'/>
-        <div className='hidden lg:flex justify-between '>
-        <div className=" text-white ml-[3%] mt-[5%] w-[60%]">
-          <p className="text-[380%] mb-[-5%]">𝕸EN&#39;S</p>
-          <p className="text-[380%] mb-[-5%]">CLOTꃅINᎶ</p>
-          <p className="text-[380%] ">FᗩSHIꆂN</p>
-        </div>
-        <div className=' rounded-[25px] overflow-hidden mt-[-2%] h-[100%] w-[100%]'>
-        <Carousel slides={slides}  />
-        </div>
-        </div>
-        <div>
-        </div>
-      <div>
       </div>
+
+      {/* Hero Image */}
+      <div className="flex justify-center items-center mt-5 lg:mt-10">
+        <Image 
+          src={'/assets/heroSection/MACHINIST (2).png'} 
+          alt='Hero Image' 
+          unoptimized={true} 
+          width={800} 
+          height={600} 
+          className='w-[70vw] lg:w-[85vw] object-contain'
+        />
       </div>
-    
+
+      {/* Large text and carousel for desktop */}
+      <div className='hidden lg:flex justify-between mt-8'>
+        <div className="text-white ml-[5%] w-[50%]">
+          <p className="text-[3.8rem] lg:text-[4.5rem] leading-none">𝕸EN'S</p>
+          <p className="text-[3.8rem] lg:text-[4.5rem] leading-none">CLOTꃅINᎶ</p>
+          <p className="text-[3.8rem] lg:text-[4.5rem] leading-none">FᗩSHIꆂN</p>
+        </div>
+        <div className='rounded-2xl overflow-hidden w-[40%]'>
+          <Carousel slides={slides} />
+        </div>
+      </div>
+    </div>
   )
 }
 
-export default Hero
-
-
-
+export default Hero;

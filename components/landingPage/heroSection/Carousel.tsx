@@ -47,7 +47,7 @@ export default function Carousel({
         </div>
       </div>
     </div>
-    <div className="absolute ml-[35%] lg:w-[58%] inset-0 flex items-center justify-between md:mt-[7%] lg:mt-[6%] z-50">
+{/*     <div className="absolute ml-[35%] lg:w-[58%] inset-0 flex items-center justify-between md:mt-[7%] lg:mt-[6%] z-50">
         <button
           onClick={prev}
           className="p-1 rounded-full shadow  text-white hover:text-white/90"
@@ -60,7 +60,7 @@ export default function Carousel({
         >
         <Image src={'/assets/heroSection/circleB.png'} alt='k' unoptimized={true} width={110} height={110} className=' z-60  pt-[1%]'/>
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
