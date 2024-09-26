@@ -10,7 +10,7 @@ import SignatureFooter from "@/components/footer/SignatureFooter";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "MɅGИITUDE",
+  title: "MACHINISTE",
   description: "Best Clothing Brand",
 };
 

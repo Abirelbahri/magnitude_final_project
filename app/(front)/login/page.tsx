@@ -65,7 +65,7 @@ const SignInPage = () => {
               className="flex w-[60vw] flex-col mt-10 pl-[6%]"
             >
               <h1 className="text-3xl font-semibold text-white mt-[16%]">
-                Unlock Your Style Potential <br /> with MAGNITUDE
+                Unlock Your Style Potential <br /> with MACHINISTE
               </h1>
               <motion.div
                 onClick={handleSignIn}
@@ -101,7 +101,7 @@ const SignInPage = () => {
                 />
               </motion.div>
               <p className="mt-5 text-sm text-gray-400">
-                By signing in, you agree to MAGNITUDE&apos;s{" "}
+                By signing in, you agree to MACHINISTE&apos;s{" "}
                 <span className="underline text-white">
                   Terms of Service, <br /> Privacy Policy{" "}
                 </span>{" "}

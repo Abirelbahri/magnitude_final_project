@@ -30,7 +30,7 @@ const Navbar2: React.FC<NavbarProps> = ({ onCartClick }) => {
     </div>
     <div className="flex flex-[3] justify-center">
     <div className="flex flex-[3] justify-center font-bold text-xl">
-    MɅGИITUDE
+    MACHINISTE
     </div>
     </div>
     {session ? (

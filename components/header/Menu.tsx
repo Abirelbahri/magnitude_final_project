@@ -40,7 +40,7 @@ const Menu = () => {
   return (
     <>
       {/* <div className="block font-bold text-md text-white">
-      MɅGИITUDE
+      MACHINISTE
       </div> */}
       <div className="hidden lg:flex flex-[4] justify-center items-center">
         <div className="mr-[20px] w-[30px] h-[30px] bg-white rounded-full relative cursor-pointer">

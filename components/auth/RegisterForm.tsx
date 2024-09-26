@@ -155,7 +155,7 @@ const RegisterForm = ({ handleClick }: any) => {
           </form>
           {error && <p className='text-red-500 mt-2'>{error}</p>}
           <p className="mt-5 font-light text-sm text-gray-400 leading-tight">
-            By signing in, you agree to MAGNITUDE&apos;s{" "}
+            By signing in, you agree to MACHINISTE&apos;s{" "}
             <span className="underline text-white">Terms of Service</span>, <br />{" "}
             <span className="underline text-white">Privacy Policy</span>, and{" "}
             <span className="underline text-white">Data Usage Properties</span>.

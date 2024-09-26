@@ -28,7 +28,7 @@ const Header = () => {
               href="/"
               className="btn btn-ghost text-white text-lg font-bold "
             >
-              MɅGИITUDE
+              MACHINISTE
             </Link>
           </div>
 
